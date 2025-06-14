@@ -1,0 +1,23 @@
+name: Keep Bot Alive
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'  # كل 10 دقائق
+  workflow_dispatch:  # تشغيل يدوي
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Ping Bot Health Endpoint
+        run: |
+          echo "Pinging bot at $(date)"
+          curl -f https://telegram-notes-bot-1bpf.onrender.com/health
+          echo "✅ Bot pinged successfully!"
+          
+      - name: Ping Bot Home Page
+        run: |
+          echo "Pinging bot home page"
+          curl -f https://telegram-notes-bot-1bpf.onrender.com/
+          echo "✅ Home page pinged successfully!"
